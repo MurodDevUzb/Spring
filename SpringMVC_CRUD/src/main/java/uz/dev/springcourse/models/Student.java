@@ -5,7 +5,7 @@ public class Student {
     private String name;
     private int age;
     private String email;
-
+    private boolean gender;
 
     private String faculty;
 
@@ -13,14 +13,15 @@ public class Student {
     public Student() {
     }
 
-    public Student(int id, String name, int age, String email, String faculty) {
+
+    public Student(int id, String name, int age, String email, boolean gender, String faculty) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.email = email;
+        this.gender = gender;
         this.faculty = faculty;
     }
-
 
 
     public int getId() {
@@ -54,11 +55,31 @@ public class Student {
         this.email = email;
     }
 
+    public boolean getGender() {
+        return gender;
+    }
+
+    public void setGender(boolean gender) {
+        this.gender = gender;
+    }
+
     public String getFaculty() {
         return faculty;
     }
 
     public void setFaculty(String faculty) {
         this.faculty = faculty;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", email='" + email + '\'' +
+                ", gender=" + gender +
+                ", faculty='" + faculty + '\'' +
+                '}';
     }
 }

@@ -15,10 +15,10 @@ public class StudentDAO {
     {
         students = new ArrayList<>();
 
-        students.add(new Student(++STUDENT_ID,"Aziz",20,"aziz@mail.ru","Math"));
-        students.add(new Student(++STUDENT_ID,"Lola",19, "lola@gmail.com","Chemistry"));
-        students.add(new Student(++STUDENT_ID,"Gulnora",20,"gulnora@mail.ru","Biology"));
-        students.add(new Student(++STUDENT_ID,"Farrux",18,"farrux@yahoo.com","Mechanical"));
+        students.add(new Student(++STUDENT_ID,"Aziz",20,"aziz@mail.ru",true ,"Math"));
+        students.add(new Student(++STUDENT_ID,"Lola",19, "lola@gmail.com",false ,"Chemistry"));
+        students.add(new Student(++STUDENT_ID,"Gulnora",20,"gulnora@mail.ru", false,"Biology"));
+        students.add(new Student(++STUDENT_ID,"Farrux",18,"farrux@yahoo.com",true ,"Mechanical"));
 
     }
 
@@ -41,6 +41,7 @@ public class StudentDAO {
         studentToBeUpdate.setName(updateStudent.getName());
         studentToBeUpdate.setAge(updateStudent.getAge());
         studentToBeUpdate.setEmail(updateStudent.getEmail());
+        studentToBeUpdate.setGender(updateStudent.getGender());
         studentToBeUpdate.setFaculty(updateStudent.getFaculty());
     }
 

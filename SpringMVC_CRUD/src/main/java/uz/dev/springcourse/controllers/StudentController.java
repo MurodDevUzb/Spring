@@ -29,6 +29,7 @@ public class StudentController {
     public String show(@PathVariable("id") int id,Model model){
         model.addAttribute("student", studentDAO.show(id));
 
+
         return "student/show";
     }
 
@@ -39,6 +40,7 @@ public class StudentController {
 
     @PostMapping()
     public String create(@ModelAttribute("student") Student student){
+        System.out.println(student);
         studentDAO.save(student);
         return "redirect:/student";
     }
