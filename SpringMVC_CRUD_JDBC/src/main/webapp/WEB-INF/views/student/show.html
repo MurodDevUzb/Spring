@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <style>
+        .inf-content{
+            border:1px solid #DDDDDD;
+            -webkit-border-radius:10px;
+            -moz-border-radius:10px;
+            border-radius:10px;
+            box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="text-info container text-center mt-4">Student Information</h1>
+    <div class="container bootstrap snippets bootdey">
+        <div class="panel-body inf-content">
+            <div class="row">
+                <div class="col-md-4">
+                    <div th:if="${student.getGender()}">
+                        <img alt="" style="width:600px;" title="" class="rounded-circle img-thumbnail isTooltip" src="https://bootdey.com/img/Content/avatar/avatar7.png" data-original-title="Usuario">
+                    </div>
+                    <div th:unless="${student.getGender()}">
+                        <img alt="" style="width:600px;" title="" class="rounded-circle img-thumbnail isTooltip" src="https://bootdey.com/img/Content/avatar/avatar3.png" data-original-title="Usuario">
+                    </div>
+<!--                    <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="team Image">-->
+<!--                    <img alt="" style="width:600px;" title="" class="rounded-circle img-thumbnail isTooltip" src="https://bootdey.com/img/Content/avatar/avatar7.png" data-original-title="Usuario">-->
+                    <ul title="Ratings" class="list-inline ratings text-center">
+                        <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <strong class="text-center">Information</strong><br>
+                    <div class="table-responsive">
+                        <table class="table table-user-information">
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        <span class="glyphicon glyphicon-asterisk text-primary"></span>
+                                        Id
+                                    </strong>
+                                </td>
+                                <td class="text-primary"  th:text="${student.getId()}">
+                                    123456789
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        <span class="glyphicon glyphicon-user  text-primary"></span>
+                                        Name
+                                    </strong>
+                                </td>
+                                <td class="text-primary"  th:text="${student.getName()}">
+                                    Name
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        <span class="glyphicon glyphicon-cloud text-primary"></span>
+                                        Age
+                                    </strong>
+                                </td>
+                                <td class="text-primary"  th:text="${student.getAge()}">
+                                    Age
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <strong>
+                                        <span class="glyphicon glyphicon-bookmark text-primary"></span>
+                                        Email
+                                    </strong>
+                                </td>
+                                <td class="text-primary"  th:text="${student.getEmail()}">
+                                    Email
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>
+                                    <strong>
+                                        <span class="glyphicon glyphicon-eye-open text-primary"></span>
+                                        Gender
+                                    </strong>
+                                </td>
+                                <div th:if="${student.getGender()}">
+                                    <td class="text-primary">
+                                        Male
+                                    </td>
+                                </div>
+                                <div th:unless="${student.getGender()}">
+                                    <td class="text-primary">
+                                        Female
+                                    </td>
+                                </div>
+<!--                                <td class="text-primary"  th:text="${student.getGender()}">-->
+<!--                                    Gender-->
+<!--                                </td>-->
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        <span class="glyphicon glyphicon-envelope text-primary"></span>
+                                        Faculty
+                                    </strong>
+                                </td>
+                                <td class="text-primary" th:text="${student.getFaculty()}">
+                                    Faculty
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                        <div class="d-flex mb-2">
+                            <a th:href="@{/student/{id}/edit(id=${student.getId()})}" class="btn btn-primary mr-4">edit</a>
+
+                            <form th:method="DELETE" th:action="@{/student/{id}(id=${student.getId()})}">
+                                <input type="submit" value="Delete" class="btn btn-danger"/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,10 +1,7 @@
 package uz.dev.springcourse.models;
 
 import javax.validation.constraints.*;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.List;
-import java.util.Stack;
+
 
 
 public class Student {
