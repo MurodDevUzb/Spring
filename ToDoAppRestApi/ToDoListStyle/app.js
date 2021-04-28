@@ -43,35 +43,58 @@ async function getTasks() {
   }
 }
 
-fetch('http://localhost:8080/todo',{
-  method: 'POST',
-  body: JSON.stringify({
-    _id : 2,
-    title: "some new title",
-    body: "some new body",
-    completed: false
-  }),
-  headers:{
-    "Content-type": "application/json; charset=UTF-8"
+async function postTask(newTitle,newBody){
+  let url = 'http://localhost:8080/todo';
+  try{
+    let res = await  fetch(url,{
+      method: 'POST',
+      body: JSON.stringify({
+        title: newTitle,
+        body: newBody,
+        completed: false
+      }),
+      headers:{
+        "Content-type": "application/json; charset=UTF-8"
+      }});
+    return await res.json();
+  }catch(error){
+    console.log(error);
   }
-})
+}
+
+// function fun(){
+//   console.log('post');
+//   fetch('http://localhost:8080/todo',{
+//     method: 'POST',
+//     body: JSON.stringify({
+//       _id : 2,
+//       title: "some new title",
+//       body: "some new body",
+//       completed: false
+//     }),
+//     headers:{
+//       "Content-type": "application/json; charset=UTF-8"
+//     }
+//   })
+//
+// }
 
 
 // fetch('http://localhost:8080/todo/2',{
 //     method: 'DELETE'
 // });
 
-async function deleteTask(id){
-  let url = `http://localhost:8080/todo/${id}`;
-  try{
-    let res = await fetch(url,{
-      method: 'DELETE'
-    });
-    return await res.json();
-  }catch (error){
-    console.log(error);
-  }
-}
+// async function deleteTask(id){
+//   let url = `http://localhost:8080/todo/${id}`;
+//   try{
+//     let res = await fetch(url,{
+//       method: 'DELETE'
+//     });
+//     return await res.json();
+//   }catch (error){
+//     console.log(error);
+//   }
+// }
 
 
 (async function () {
@@ -83,7 +106,6 @@ async function deleteTask(id){
   }, {});
 
   console.log(objOfTasks);
-
   const themes = {
     default: {
       "--base-text-color": "#212529",
@@ -212,8 +234,7 @@ async function deleteTask(id){
 
     return li;
   }
-
-  function onFormSubmitHandler(e) {
+  async function onFormSubmitHandler(e) {
     e.preventDefault();
     const titleValue = inputTitle.value;
     const bodyValue = inputBody.value;
@@ -223,18 +244,23 @@ async function deleteTask(id){
       return;
     }
 
-    const task = createNewTask(titleValue, bodyValue);
+    const post = await postTask(titleValue,bodyValue);
+    const idValue = post._id;
+    // console.log(post._id);
+    const task = createNewTask(idValue, titleValue, bodyValue);
     const listItem = listItemTemplate(task);
     listContainer.insertAdjacentElement("afterbegin", listItem);
     form.reset();
   }
 
-  function createNewTask(title, body) {
+
+
+  function createNewTask(id, title, body) {
     const newTask = {
       title,
       body,
       completed: false,
-      _id: `task-${Math.random()}`,
+      _id: id,
     };
 
     objOfTasks[newTask._id] = newTask;
@@ -263,7 +289,7 @@ async function deleteTask(id){
          let res = await fetch(url,{
            method: 'DELETE'
          });
-         return await res.json();
+         // return await res.json();
        }catch (error){
          console.log(error);
        }
