@@ -11,6 +11,7 @@ import java.util.Set;
 
 @Data
 @Entity
+@Table(name = "post")
 public class Post {
 
     @Id
@@ -19,14 +20,14 @@ public class Post {
     private String title;
     private String caption;
     private String location;
-    private Integer like;
+    private Integer likes;
 
     @Column
     @ElementCollection(targetClass = String.class)
     private Set<String> likedUsers = new HashSet<>();
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
-    @OneToMany(cascade = CascadeType.REFRESH,fetch = FetchType.EAGER, mappedBy = "post",orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.REFRESH,fetch = FetchType.EAGER,mappedBy = "post",orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
     @Column(updatable = false)
     private LocalDateTime createdDate;
