@@ -13,7 +13,7 @@ import java.util.*;
 
 @Data
 @Entity
-@Table(name = "user")
+@Table(name = "beezz_user")
 public class User implements UserDetails {
 
     @Id
@@ -33,11 +33,11 @@ public class User implements UserDetails {
     private String password;
 
     @ElementCollection(targetClass = Role.class)
-    @CollectionTable(name = "user_role",
-    joinColumns = @JoinColumn(name = "user_id"))
+    @CollectionTable(name = "beezz_user_role",
+    joinColumns = @JoinColumn(name = "beezz_user_id"))
     private Set<Role> role = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "user",orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "beezz_user",orphanRemoval = true)
     private List<Post> posts = new ArrayList<>();
 
     @JsonFormat(pattern = "yy-mm-dd HH:mm:ss")

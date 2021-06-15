@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Login - Shopme Admin</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous" />
+</head>
+<body>
+<div class="container-fluid text-center">
+
+    <div class="info">
+        <h1 class="text-info mb-4 mt-4" >SIGN UP</h1>
+    </div>
+
+    <form th:action="@{/registration}" th:object="${userForm}" method="POST" style="max-width: 350px; margin: 0 auto;">
+
+        <div th:if="${param.error}">
+            <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+        </div>
+
+        <div th:if="${param.logout}">
+            <p class="text-warning">You have been logged out.</p>
+        </div>
+
+        <div class="border border-secondary p-3 rounded">
+            <p>Create Account</p>
+            <p>
+                <input type="email" name="email" th:field="*{email}" class="form-control" placeholder="E-mail" required autofocus/>
+                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-error" ></span>
+            </p>
+            <p>
+                <input type="text" name="username" th:field="*{username}" class="form-control" placeholder="Username" required autofocus/>
+                <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-error"></span>
+            </p>
+            <p>
+                <input type="password" name="password" th:field="*{password}" class="form-control" placeholder="Password" required autofocus/>
+                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-error"></span>
+            </p>
+            <p>
+                <input type="password" name="passwordConfirm" th:field="*{passwordConfirm}" class="form-control" placeholder="Confirm Password" required autofocus/>
+                <span th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}" class="text-error"></span>
+            </p>
+            <p>
+                <a href="/registration" class="text-primary">SIGN UP</a>
+            </p>
+            <p>
+                <input type="submit" value="Login" class="btn btn-primary" />
+            </p>
+        </div>
+    </form>
+</div>
+</body>
+</html>
